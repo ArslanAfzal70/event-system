@@ -6,19 +6,19 @@
                     Event Manager
                 </span>
                 <div class="input-row">
-                    <span class="label">Username</span>
-                    <input type="text" name="email" placeholder="Enter username">
+                    <span class="label">Email</span>
+                    <input v-model="email" type="text" name="email" placeholder="Enter Email">
                     <span class="input-focus"></span>
                 </div>
 
                 <div class="input-row">
                     <span class="label">Password</span>
-                    <input type="password" name="password" placeholder="Enter password">
+                    <input v-model="password" type="password" name="password" placeholder="Enter password">
                     <span class="input-focus"></span>
                 </div>
 
                 <div class="btn-container mt-5">
-                    <button>
+                    <button :disabled='disabled' @click="adminLogin()">
                         Login
                     </button>
                 </div>
@@ -27,13 +27,56 @@
     </div>
 </template>
 <script>
+import axios from "axios";
 export default {
     name: 'AdminLogin',
+    data() {
+        return {
+            email: '',
+            password: '',
+            disabled: false
+        }
+    },
     mounted() {
-        this.$toaster.success('Your toaster success message.')
+
     },
     methods: {
-
+        adminLogin: async function () {
+            this.disabled = true;
+            if (this.email && this.password) {
+                try {
+                    const user = await axios.post(
+                        "login",
+                        {
+                            email: this.email,
+                            password: this.password
+                        }
+                    );
+                    if (user.data.status) {
+                        this.email = '';
+                        this.password = '';
+                        this.$toast.success('Login Success !');
+                    }
+                    else {
+                        this.$toast.error('Inalid Login Details.');
+                    }
+                    console.log(user);
+                } catch (e) {
+                    if (e.response.status === 422) {
+                        let errors = e.response.data.errors;
+                        Object.keys(errors).forEach(key => {
+                            errors[key].forEach(element => {
+                                this.$toast.error(element);
+                            });
+                        });
+                    }
+                }
+            }
+            else {
+                this.$toast.error('All fields are required');
+            }
+            this.disabled = false;
+        }
     },
 }
 </script>
