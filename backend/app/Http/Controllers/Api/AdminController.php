@@ -23,10 +23,11 @@ class AdminController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = User::where('email', $request->email)->first();
+            $user['token'] = $user->createToken("Admin Token")->plainTextToken;
             return response()->json([
                 'status' => true,
                 'msg' => "logged in Successfully",
-                'token' => $user->createToken("Admin Token")->plainTextToken
+                'user' => $user,
             ]);
         } else {
             return response()->json([

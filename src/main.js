@@ -13,7 +13,9 @@ AOS.init();
 Vue.use(Toast);
 
 new Vue({
+  router,
   render: (h) => h(App),
 }).$mount("#app");
 
 import "bootstrap/dist/js/bootstrap.js";
+import router from "./router";

@@ -2,26 +2,28 @@
     <div class="limiter">
         <div class="login-container">
             <div class="login-wrapper" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
-                <span class="title">
-                    Event Manager
-                </span>
-                <div class="input-row">
-                    <span class="label">Email</span>
-                    <input v-model="email" type="text" name="email" placeholder="Enter Email">
-                    <span class="input-focus"></span>
-                </div>
+                <form @submit.prevent="adminLogin">
+                    <span class="title">
+                        Event Manager
+                    </span>
+                    <div class="input-row">
+                        <span class="label">Email</span>
+                        <input v-model="email" type="text" name="email" placeholder="Enter Email">
+                        <span class="input-focus"></span>
+                    </div>
 
-                <div class="input-row">
-                    <span class="label">Password</span>
-                    <input v-model="password" type="password" name="password" placeholder="Enter password">
-                    <span class="input-focus"></span>
-                </div>
+                    <div class="input-row">
+                        <span class="label">Password</span>
+                        <input v-model="password" type="password" name="password" placeholder="Enter password">
+                        <span class="input-focus"></span>
+                    </div>
 
-                <div class="btn-container mt-5">
-                    <button :disabled='disabled' @click="adminLogin()">
-                        Login
-                    </button>
-                </div>
+                    <div class="btn-container mt-5">
+                        <button :disabled='disabled'>
+                            Login
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -29,7 +31,7 @@
 <script>
 import axios from "axios";
 export default {
-    name: 'AdminLogin',
+    name: 'LoginView',
     data() {
         return {
             email: '',
@@ -42,6 +44,7 @@ export default {
     },
     methods: {
         adminLogin: async function () {
+
             this.disabled = true;
             if (this.email && this.password) {
                 try {
