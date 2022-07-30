@@ -13,10 +13,10 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 /* import specific icons */
-import { fas } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
-library.add(fas);
+library.add(faUser, faCalendarDays);
 
 /* add font awesome icon component */
 Vue.component("font-awesome-icon", FontAwesomeIcon);
