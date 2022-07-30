@@ -8,11 +8,10 @@
                     data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <a class="navbar-brand fw-bold me-auto" href="#">
+                <router-link to="/dashboard" class="navbar-brand fw-bold me-auto">
                     <font-awesome-icon icon="fa-solid fa-calendar-days" />
                     <span class="ms-2">Event Manager</span>
-                </a>
+                </router-link>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -44,8 +43,35 @@
 
         <div class="offcanvas offcanvas-start sidebar-nav bg-purple" tabindex="-1" id="offcanvasExample"
             aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-body">
-
+            <div class="offcanvas-body p-0">
+                <nav class="navbar-dark mt-4">
+                    <ul class="navbar-nav">
+                        <li>
+                            <a href="#" class="nav-link px-3 active">
+                                <font-awesome-icon icon="fa-solid fa-gauge" />
+                                <span class="ps-2">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-3">
+                                <font-awesome-icon icon="fa-solid fa-calendar-days" />
+                                <span class="ps-2">Event</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-3 ">
+                                <font-awesome-icon icon="fa-solid fa-ticket" />
+                                <span class="ps-2">Tickets</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-3 ">
+                                <font-awesome-icon icon="fa-solid fa-chart-column" />
+                                <span class="ps-2">Report</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
 
@@ -86,6 +112,16 @@ button:focus {
 
 .sidebar-nav {
     width: $sidebarWdith  !important;
+
+    ul {
+        li {
+            padding-bottom: 10px;
+        }
+    }
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
 }
 
 @media (min-width:992px) {
