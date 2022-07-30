@@ -59,11 +59,12 @@ export default {
                         this.email = '';
                         this.password = '';
                         this.$toast.success('Login Success !');
+                        localStorage.setItem('user', JSON.stringify(user.data.user));
+                        this.$router.push('dashboard');
                     }
                     else {
                         this.$toast.error('Inalid Login Details.');
                     }
-                    console.log(user);
                 } catch (e) {
                     if (e.response.status === 422) {
                         let errors = e.response.data.errors;
