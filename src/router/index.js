@@ -15,6 +15,9 @@ const routes = [
     path: "/login",
     name: "login",
     component: LoginView,
+    meta: {
+      title: "Login",
+    },
     beforeEnter: (to, from, next) => {
       if (localStorage.getItem("token")) {
         next({ name: "dashboard" });
@@ -40,25 +43,25 @@ const routes = [
         path: "dashboard",
         name: "dashboard",
         component: DashboardView,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: "Dashboard" },
       },
       {
         path: "events",
         name: "events",
         component: EventsView,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: "Events" },
       },
       {
         path: "tickets",
         name: "tickets",
         component: TicketsView,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: "Ticktes" },
       },
       {
         path: "report",
         name: "report",
         component: ReportView,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: "Report" },
       },
     ],
   },
@@ -85,6 +88,9 @@ router.beforeEach((to, from, next) => {
       next({ name: "login" });
     }
   }
+  document.title = to.meta.title
+    ? to.meta.title + " - Event Manager"
+    : "Event Manager";
   next();
 });
 
