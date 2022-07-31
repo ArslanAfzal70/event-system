@@ -23,7 +23,7 @@ class AdminController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = User::where('email', $request->email)->first();
-            $user['token'] = $user->createToken("Admin Token")->plainTextToken;
+            $user['token'] = $user->createToken('Admin Token')->accessToken;
             return response()->json([
                 'status' => true,
                 'msg' => "logged in Successfully",
@@ -35,5 +35,13 @@ class AdminController extends Controller
                 'error' => "Invalid Login Details"
             ]);
         }
+    } // login function
+
+    public function logout(Request $request)
+    {
+        $request->user()->token()->revoke();
+        return response()->json([
+            'status' => true
+        ]);
     }
 }

@@ -30,7 +30,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                                <li><button class="dropdown-item" @click="logout">Logout</button></li>
                             </ul>
                         </li>
                     </ul>
@@ -74,16 +74,28 @@
                 </nav>
             </div>
         </div>
-
-
     </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
     name: 'DashbaordView',
     data() {
         return {
             user: {}
+        }
+    },
+    methods: {
+        logout: async function () {
+            let token = this.user.token;
+            axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+            const res = await axios.post('logout');
+            if (res.data.status) {
+                localStorage.removeItem('user');
+                this.$toast.success('Logout Success !');
+                this.$router.push('/');
+            }
         }
     },
     mounted() {
