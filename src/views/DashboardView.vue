@@ -88,11 +88,10 @@ export default {
     },
     methods: {
         logout: async function () {
-            let token = this.user.token;
-            axios.defaults.headers.common["Authorization"] = "Bearer " + token;
             const res = await axios.post('logout');
             if (res.data.status) {
                 localStorage.removeItem('user');
+                localStorage.removeItem('token');
                 this.$toast.success('Logout Success !');
                 this.$router.push('/');
             }

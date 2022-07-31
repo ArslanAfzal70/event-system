@@ -60,6 +60,7 @@ export default {
                         this.password = '';
                         this.$toast.success('Login Success !');
                         localStorage.setItem('user', JSON.stringify(user.data.user));
+                        localStorage.setItem('token', user.data.token);
                         this.$router.push('dashboard');
                     }
                     else {
