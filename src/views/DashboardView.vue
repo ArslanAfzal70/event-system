@@ -88,7 +88,11 @@ export default {
     },
     methods: {
         logout: async function () {
-            const res = await axios.post('logout');
+            const res = await axios.post('logout', {}, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            });
             if (res.data.status) {
                 localStorage.removeItem('user');
                 localStorage.removeItem('token');
