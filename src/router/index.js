@@ -62,12 +62,6 @@ const routes = [
       },
     ],
   },
-  // {
-  //   path: "/dashboard",
-  //   name: "dashboard",
-  //   component: DashboardView,
-  //   meta: { requiresAuth: true },
-  // },
   {
     path: "*",
     name: "PageNotFound",
@@ -79,6 +73,8 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+  linkActiveClass: "active", // active class for non-exact links.
+  linkExactActiveClass: "active", // active class for *exact* links.
 });
 
 router.beforeEach((to, from, next) => {

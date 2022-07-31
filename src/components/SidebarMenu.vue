@@ -5,7 +5,7 @@
             <nav class="navbar-dark mt-4">
                 <ul class="navbar-nav">
                     <li>
-                        <router-link to="/dashboard" class="nav-link px-3 active">
+                        <router-link to="/dashboard" class="nav-link px-3">
                             <font-awesome-icon icon="fa-solid fa-gauge" />
                             <span class="ps-2">Dashboard</span>
                         </router-link>
