@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\EventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,5 @@ Route::post('login', [AdminController::class, 'login']);
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', [AdminController::class, 'logout']);
+    Route::get('get-events', [EventController::class, 'getEvents']);
 });

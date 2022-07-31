@@ -46,9 +46,11 @@ $sidebarWdith : 300px;
         border: none !important;
     }
 
-    button:focus {
+    button:focus,
+    .btn:focus {
         box-shadow: none;
     }
+
 }
 
 .bg-purple {
@@ -77,7 +79,7 @@ $sidebarWdith : 300px;
 }
 
 .inner-wrapper {
-    height: calc(100vh - 56px);
+    min-height: calc(100vh - 56px);
 }
 
 .title-box {

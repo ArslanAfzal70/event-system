@@ -31,10 +31,21 @@ import {
   faChartColumn,
   faTicket,
   faPlus,
+  faTrash,
+  faPencilAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
-library.add(faUser, faCalendarDays, faGauge, faChartColumn, faTicket, faPlus);
+library.add(
+  faUser,
+  faCalendarDays,
+  faGauge,
+  faChartColumn,
+  faTicket,
+  faPlus,
+  faTrash,
+  faPencilAlt
+);
 
 /* add font awesome icon component */
 Vue.component("font-awesome-icon", FontAwesomeIcon);

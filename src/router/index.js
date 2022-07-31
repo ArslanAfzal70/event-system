@@ -52,6 +52,12 @@ const routes = [
         meta: { requiresAuth: true, title: "Events" },
       },
       {
+        path: "event/edit/:id",
+        name: "event-edit",
+        component: EventsView,
+        meta: { requiresAuth: true, title: "Edit Event" },
+      },
+      {
         path: "tickets",
         name: "tickets",
         component: TicketsView,
