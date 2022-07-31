@@ -66,6 +66,19 @@ button:focus {
     box-shadow: none;
 }
 
+.main {
+    margin-top: 56px;
+    padding: 15px;
+    background-color: #edf1f5;
+    // // min-height: 338px;
+    // height: calc(100% - 56px);
+}
+
+.title-box {
+    padding: 25px 25px 0;
+    margin-bottom: 15px;
+}
+
 @media (min-width:992px) {
     body {
         overflow: auto !important;
