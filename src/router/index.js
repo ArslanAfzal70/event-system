@@ -2,6 +2,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import LoginView from "../views/LoginView.vue";
 import DashboardView from "../views/DashboardView.vue";
+import EventsView from "../views/EventsView.vue";
+import TicketsView from "../views/TicketsView.vue";
+import ReportView from "../views/ReportView.vue";
 import DefaultView from "../views/DefaultView.vue";
 import PageNotFoundView from "../views/PageNotFoundView.vue";
 
@@ -37,6 +40,24 @@ const routes = [
         path: "dashboard",
         name: "dashboard",
         component: DashboardView,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "events",
+        name: "events",
+        component: EventsView,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "tickets",
+        name: "tickets",
+        component: TicketsView,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "report",
+        name: "report",
+        component: ReportView,
         meta: { requiresAuth: true },
       },
     ],

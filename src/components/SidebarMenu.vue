@@ -11,22 +11,23 @@
                         </router-link>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-3">
+                        <router-link to="/events" class="nav-link px-3">
                             <font-awesome-icon icon="fa-solid fa-calendar-days" />
-                            <span class="ps-2">Event</span>
-                        </a>
+                            <span class="ps-2">Events</span>
+                        </router-link>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-3 ">
+                        <router-link to="/tickets" class="nav-link px-3">
                             <font-awesome-icon icon="fa-solid fa-ticket" />
                             <span class="ps-2">Tickets</span>
-                        </a>
+                        </router-link>
+
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-3 ">
+                        <router-link to="/report" class="nav-link px-3">
                             <font-awesome-icon icon="fa-solid fa-chart-column" />
                             <span class="ps-2">Report</span>
-                        </a>
+                        </router-link>
                     </li>
                 </ul>
             </nav>
