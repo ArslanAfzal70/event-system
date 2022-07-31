@@ -38,14 +38,17 @@ $dark-purpule : #32213A;
 $yellow : #F4BF01;
 $sidebarWdith : 300px;
 
-input,
-button {
-    outline: none !important;
-    border: none !important;
-}
+.no-outline {
 
-button:focus {
-    box-shadow: none;
+    input,
+    button {
+        outline: none !important;
+        border: none !important;
+    }
+
+    button:focus {
+        box-shadow: none;
+    }
 }
 
 .bg-purple {
@@ -70,8 +73,11 @@ button:focus {
     margin-top: 56px;
     padding: 15px;
     background-color: #edf1f5;
-    // // min-height: 338px;
-    // height: calc(100% - 56px);
+    min-height: calc(100vh - 56px) !important;
+}
+
+.inner-wrapper {
+    height: calc(100vh - 56px);
 }
 
 .title-box {

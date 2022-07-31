@@ -1,6 +1,6 @@
 <template>
     <div>
-        Hello dolly
+        Dashboard
     </div>
 </template>
 <script>

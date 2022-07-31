@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-purple fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-purple fixed-top top-nav no-outline">
             <div class="container-fluid">
                 <!-- ----------- OFFCANVAS TRIGGER ----------- -->
                 <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas"

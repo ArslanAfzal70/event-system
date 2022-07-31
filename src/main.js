@@ -1,4 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "datatables.net-bs5";
+import "datatables.net-buttons-bs5";
+import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+import "jszip";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import "datatables.net-buttons/js/buttons.colVis.js";
+import "datatables.net-buttons/js/buttons.html5.js";
+import "datatables.net-buttons/js/buttons.print.js";
+
 import Vue from "vue";
 import App from "./App.vue";
 import "./axios";
@@ -19,10 +30,11 @@ import {
   faGauge,
   faChartColumn,
   faTicket,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
-library.add(faUser, faCalendarDays, faGauge, faChartColumn, faTicket);
+library.add(faUser, faCalendarDays, faGauge, faChartColumn, faTicket, faPlus);
 
 /* add font awesome icon component */
 Vue.component("font-awesome-icon", FontAwesomeIcon);
