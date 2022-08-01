@@ -29,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(e, index) in events" :key="e.id">
+                    <tr v-for="(e, index) in events" :key="e.id" :id="'row' + index">
                         <td>{{ e.id }}</td>
                         <td>{{ e.title }}</td>
                         <td>{{ e.description }}</td>
@@ -85,6 +85,7 @@ export default {
 
         },
         deleteEvent: async function (id, index) {
+
             if (confirm('Are you sure you want to delete?')) {
                 try {
                     const res = await axios.post('delete-event/' + id, {}, {
@@ -94,6 +95,7 @@ export default {
                     });
                     if (res.data.status) {
                         this.events.splice(index, 1);
+                        $("#myTable").DataTable().rows($("#row" + index)).remove()
                         this.initDatatable();
                         this.$toast.success('Event Deleted Successfully');
                     }
