@@ -30,11 +30,13 @@
                 </div>
                 <div class="col-6">
                     <label for="date-start" class="form-label">Date Start</label>
-                    <input v-model="eventData.date_start" type="datetime-local" class="form-control" id="date-start">
+                    <input step="any" v-model="eventData.date_start" type="datetime-local" class="form-control"
+                        id="date-start">
                 </div>
                 <div class="col-6">
                     <label for="date-end" class="form-label">Date End</label>
-                    <input v-model="eventData.date_end" type="datetime-local" class="form-control" id="date-end">
+                    <input step="any" v-model="eventData.date_end" type="datetime-local" class="form-control"
+                        id="date-end">
                 </div>
                 <div class="col-md-4">
                     <label for="silver_price" class="form-label">Silver Price</label>
