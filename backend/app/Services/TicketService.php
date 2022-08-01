@@ -39,7 +39,7 @@ class TicketService
 
     public function getTicketList()
     {
-        return Ticket::all();
+        return Ticket::with('event')->get();
     }
 
     /* ******************************************** */

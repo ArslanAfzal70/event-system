@@ -22,7 +22,7 @@
                         <th>Phone</th>
                         <th>Type</th>
                         <th>Price</th>
-                        <th>Event ID</th>
+                        <th>Event</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -34,7 +34,7 @@
                         <td>{{ t.phone }}</td>
                         <td>{{ t.type }}</td>
                         <td>{{ t.price }}</td>
-                        <td>{{ t.event_id }}</td>
+                        <td>{{ t.event.title }}</td>
                         <td>
                             <router-link class="btn btn-info btn-sm text-white action-btn"
                                 :to="{ name: 'ticket-edit', params: { id: t.id } }">
@@ -63,6 +63,7 @@ export default {
     },
     mounted() {
         this.getTickets();
+
     },
     methods: {
         getTickets: function () {
