@@ -29,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="e in events" :key="e.id">
+                    <tr v-for="(e, index) in events" :key="e.id">
                         <td>{{ e.id }}</td>
                         <td>{{ e.title }}</td>
                         <td>{{ e.description }}</td>
@@ -44,7 +44,7 @@
                                 :to="{ name: 'event-edit', params: { id: e.id } }">
                                 <font-awesome-icon icon="fa-solid fa-pencil-alt" />
                             </router-link>
-                            <button @click="deleteEvent(e.id)" class="btn btn-sm btn-danger action-btn ms-1">
+                            <button @click="deleteEvent(e.id, index)" class="btn btn-sm btn-danger action-btn ms-1">
                                 <font-awesome-icon icon="fa-solid fa-trash" />
                             </button>
                         </td>
@@ -77,29 +77,50 @@ export default {
                 }
             }).then((res) => {
                 this.events = res.data;
-                setTimeout(() => {
-                    $('#myTable').DataTable({
-                        dom: 'Bfrtip',
-                        responsive: true,
-                        destroy: true,
-                        buttons: [
-                            'copy',
-                            'pdf',
-                            'print',
-                            'csv'
-                        ],
-                    });
-                }, 1000)
+                this.initDatatable();
 
             }).catch((error) => {
                 console.log(error);
             });
 
         },
-        deleteEvent: function (id) {
+        deleteEvent: async function (id, index) {
             if (confirm('Are you sure you want to delete?')) {
-                console.log(id);
+                try {
+                    const res = await axios.post('delete-event/' + id, {}, {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        }
+                    });
+                    if (res.data.status) {
+                        this.events.splice(index, 1);
+                        this.initDatatable();
+                        this.$toast.success('Event Deleted Successfully');
+                    }
+                    else {
+                        this.$toast.error('Something went wrong please try again.');
+                    }
+                } catch (e) {
+                    if (e.response.status === 422) {
+                        this.errors = e.response.data.errors;
+                    }
+                }
             }
+        },
+        initDatatable: function () {
+            setTimeout(() => {
+                $('#myTable').DataTable({
+                    dom: 'Bfrtip',
+                    responsive: true,
+                    destroy: true,
+                    buttons: [
+                        'copy',
+                        'pdf',
+                        'print',
+                        'csv'
+                    ],
+                });
+            }, 1000)
         }
     },
 

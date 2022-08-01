@@ -18,35 +18,35 @@
             <form @submit.prevent="updateEvent" class="row g-3 no-outline">
                 <div class="col-md-6">
                     <label for="title" class="form-label">Title</label>
-                    <input v-model="event.title" type="text" class="form-control" id="title">
+                    <input v-model="eventData.title" type="text" class="form-control" id="title">
                 </div>
                 <div class="col-md-6">
                     <label for="capacity" class="form-label">Capacity</label>
-                    <input v-model="event.capacity" type="number" class="form-control" id="capacity">
+                    <input v-model="eventData.capacity" type="number" class="form-control" id="capacity">
                 </div>
                 <div class="col-md-12">
                     <label for="description" class="form-label">Description</label>
-                    <textarea v-model="event.description" class="form-control" id="description"></textarea>
+                    <textarea v-model="eventData.description" class="form-control" id="description"></textarea>
                 </div>
                 <div class="col-6">
                     <label for="date-start" class="form-label">Date Start</label>
-                    <input v-model="event.date_start" type="datetime-local" class="form-control" id="date-start">
+                    <input v-model="eventData.date_start" type="datetime-local" class="form-control" id="date-start">
                 </div>
                 <div class="col-6">
                     <label for="date-end" class="form-label">Date End</label>
-                    <input v-model="event.date_end" type="datetime-local" class="form-control" id="date-end">
+                    <input v-model="eventData.date_end" type="datetime-local" class="form-control" id="date-end">
                 </div>
                 <div class="col-md-4">
                     <label for="silver_price" class="form-label">Silver Price</label>
-                    <input v-model="event.silver_price" type="number" class="form-control" id="silver_price">
+                    <input v-model="eventData.silver_price" type="number" class="form-control" id="silver_price">
                 </div>
                 <div class="col-md-4">
                     <label for="gold_price" class="form-label">Gold Price</label>
-                    <input v-model="event.gold_price" type="number" class="form-control" id="gold_price">
+                    <input v-model="eventData.gold_price" type="number" class="form-control" id="gold_price">
                 </div>
                 <div class="col-md-4">
                     <label for="platinum_price" class="form-label">Platinum Price</label>
-                    <input v-model="event.platinum_price" type="number" class="form-control" id="platinum_price">
+                    <input v-model="eventData.platinum_price" type="number" class="form-control" id="platinum_price">
                 </div>
 
                 <div class="col-12 mt-4">
@@ -64,12 +64,12 @@ export default {
     data() {
         return {
             errors: "",
-            event: {}
+            eventData: {}
         }
     },
 
     mounted() {
-        this.editEvent();
+        this.getEventData();
     },
 
     methods: {
@@ -77,20 +77,12 @@ export default {
         updateEvent: async function () {
             this.errors = "";
             try {
-                const res = await axios.post('update-event', event, {
+                const res = await axios.post('update-event/' + this.$route.params.id, this.eventData, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
                 });
                 if (res.data.status) {
-                    this.title = "";
-                    this.description = "";
-                    this.date_start = "";
-                    this.date_end = "";
-                    this.silver_price = "";
-                    this.gold_price = "";
-                    this.platinum_price = "";
-                    this.capacity = "";
                     this.$toast.success('Event updated Successfully');
                 }
                 else {
@@ -99,25 +91,23 @@ export default {
             } catch (e) {
                 if (e.response.status === 422) {
                     this.errors = e.response.data.errors;
-                    console.log(this.errors);
                 }
             }
         },
 
-        // Edit Event
-        editEvent: async function () {
+        // Get Event Data
+        getEventData: async function () {
             const res = await axios.get('edit-event/' + this.$route.params.id, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             });
             if (res.data.status) {
-                this.event = res.data.event;
+                this.eventData = res.data.event;
             }
             else {
                 this.$router.push('/pageNotFound');
             }
-            console.log(res);
         }
     },
 

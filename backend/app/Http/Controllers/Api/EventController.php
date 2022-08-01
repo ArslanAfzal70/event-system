@@ -33,11 +33,7 @@ class EventController extends Controller
     public function createEvent(EventRequest $request)
     {
 
-        $this->eventService->create($request);
-        return response()->json([
-            'status' => true,
-            'msg' => "Event Added Successfully"
-        ]);
+        return $this->eventService->create($request);
     }
 
     /* ******************************************** */
@@ -47,5 +43,23 @@ class EventController extends Controller
     public function editEvent($id)
     {
         return $this->eventService->getEvent($id);
+    }
+
+    /* ******************************************** */
+    /*                 UPDATE EVENT                 */
+    /* ******************************************** */
+
+    public function updateEvent(Request $request, $id)
+    {
+        return $this->eventService->updateEvent($request, $id);
+    }
+
+    /* ******************************************** */
+    /*                 DELETE EVENT                 */
+    /* ******************************************** */
+
+    public function deleteEvent($id)
+    {
+        return $this->eventService->deleteEvent($id);
     }
 }
