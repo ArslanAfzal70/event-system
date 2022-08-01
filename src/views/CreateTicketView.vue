@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="phone" class="form-label">Phone</label>
-                    <input v-model="phone" type="number" class="form-control" id="phone">
+                    <input v-model="phone" type="text" class="form-control" id="phone">
                 </div>
                 <div class="col-md-6">
                     <label for="phone" class="form-label">Events</label>
@@ -94,6 +94,8 @@ export default {
     },
 
     methods: {
+
+        //get events list to show in select
         getEvents: function () {
 
             axios.get('get-event-list', {
@@ -108,6 +110,8 @@ export default {
             });
 
         },
+
+        //create a new ticket
         createTicket: async function () {
             this.errors = "";
             try {
@@ -144,6 +148,8 @@ export default {
                 }
             }
         },
+
+        //update the ticket price when user change the select option
         updateTicketPrice: function (event) {
             const index = event.target.options[event.target.options.selectedIndex].getAttribute('data-index');
             this.silver_price = this.events[index].silver_price;
@@ -153,6 +159,8 @@ export default {
             this.$refs.gold_radio.checked = false;
             this.$refs.platinum_radio.checked = false;
         },
+
+        // update the data of selected type and price
         updateTypePrice: function (event) {
             const type = event.target.getAttribute('data-type');
             switch (type) {

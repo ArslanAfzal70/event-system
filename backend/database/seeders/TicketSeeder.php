@@ -41,7 +41,7 @@ class TicketSeeder extends Seeder
             Ticket::create([
                 'name' => $value,
                 'email' => strtolower($value) . "@email.com",
-                "phone" => "+971" . mt_rand(1000, 9000) . "xxxx",
+                "phone" => "+971" . mt_rand(10000, 90000),
                 "type" => $key,
                 "price" => $chooseEvent[$key],
                 "event_id" => $id,

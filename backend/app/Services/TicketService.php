@@ -47,7 +47,7 @@ class TicketService
     /* ******************************************** */
     public function getTicket($id)
     {
-        $ticket = Ticket::find($id);
+        $ticket = Ticket::where('id', $id)->with('event')->first();
         if ($ticket) {
             return response()->json([
                 'status' => true,
@@ -66,27 +66,25 @@ class TicketService
 
     public function updateTicket(Request $request, $id)
     {
-        $event = Event::find($id);
+        $ticket = Ticket::find($id);
 
-        if (!$event) {
+        if (!$ticket) {
             return response()->json([
                 'status' => false,
                 'msg' => "something went wrong please try again"
             ]);
         }
-        $event->title = $request->title;
-        $event->description = $request->description;
-        $event->date_start = $request->date_start;
-        $event->date_end = $request->date_end;
-        $event->silver_price = $request->silver_price;
-        $event->gold_price = $request->gold_price;
-        $event->platinum_price = $request->platinum_price;
-        $event->capacity = $request->capacity;
-        $event->save();
+        $ticket->name = $request->name;
+        $ticket->email = $request->email;
+        $ticket->phone = $request->phone;
+        $ticket->type = $request->type;
+        $ticket->price = $request->price;
+        $ticket->event_id = $request->event_id;
+        $ticket->save();
 
         return response()->json([
             'status' => true,
-            'msg' => "Event Updated Successfully"
+            'msg' => "Ticket Updated Successfully"
         ]);
     }
 

@@ -26,7 +26,7 @@ class TicketRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'required|numeric',
+            'phone' => 'required',
             'type' => 'required|max:255',
             'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'event_id' => 'required|numeric'

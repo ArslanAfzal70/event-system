@@ -1,8 +1,8 @@
 <template>
     <div class="bg-white pb-5 inner-wrapper p-3">
         <div class="title-box">
-            <h3 class=" m-b-0 display-4">Edit Event</h3>
-            <p class="text-muted m-b-30 font-13">Here you can Edit an event</p>
+            <h3 class=" m-b-0 display-4">Edit Ticket</h3>
+            <p class="text-muted m-b-30 font-13">Here you can edit ticket</p>
         </div>
         <div class="alert alert-danger" v-if="errors">
             <ul>
@@ -15,44 +15,53 @@
         </div>
         <!-- ----------------- FORM ------------------ -->
         <div class="col-12 form-main">
-            <form @submit.prevent="updateEvent" class="row g-3 no-outline">
+            <form @submit.prevent="updateTicket" class="row g-3 no-outline">
                 <div class="col-md-6">
-                    <label for="title" class="form-label">Title</label>
-                    <input v-model="eventData.title" type="text" class="form-control" id="title">
+                    <label for="name" class="form-label">Name</label>
+                    <input v-model="ticketData.name" type="text" class="form-control" id="name">
                 </div>
                 <div class="col-md-6">
-                    <label for="capacity" class="form-label">Capacity</label>
-                    <input v-model="eventData.capacity" type="number" class="form-control" id="capacity">
+                    <label for="email" class="form-label">Email</label>
+                    <input v-model="ticketData.email" type="email" class="form-control" id="email">
                 </div>
-                <div class="col-md-12">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea v-model="eventData.description" class="form-control" id="description"></textarea>
+                <div class="col-md-6">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input v-model="ticketData.phone" type="text" class="form-control" id="phone">
                 </div>
-                <div class="col-6">
-                    <label for="date-start" class="form-label">Date Start</label>
-                    <input step="any" v-model="eventData.date_start" type="datetime-local" class="form-control"
-                        id="date-start">
+                <div class="col-md-6">
+                    <label for="phone" class="form-label">Events</label>
+                    <select @change="updateTicketPrice($event)" class="form-select" aria-label="Default select example"
+                        v-model="ticketData.event_id">
+                        <option v-for="(e, index) in events" :key="index" :value="e.id" :data-index="index">
+                            {{ e.title }}
+                        </option>
+                    </select>
                 </div>
-                <div class="col-6">
-                    <label for="date-end" class="form-label">Date End</label>
-                    <input step="any" v-model="eventData.date_end" type="datetime-local" class="form-control"
-                        id="date-end">
+                <div class="col-12">
+                    <div class="form-check">
+                        <input @change="updateTypePrice($event)" class="form-check-input" name="eventPrice" type="radio"
+                            id="silver_price" :value="silver_price" data-type="silver" ref="silver_radio">
+                        <label class="form-check-label" for="silver_price">
+                            Silver (${{ silver_price }})
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input @change="updateTypePrice($event)" class="form-check-input" type="radio" name="eventPrice"
+                            id="gold_price" :value="gold_price" data-type="gold" ref="gold_radio">
+                        <label class="form-check-label" for="gold_price">
+                            Gold (${{ gold_price }})
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input @change="updateTypePrice($event)" class="form-check-input" type="radio" name="eventPrice"
+                            id="platinum_price" :value="platinum_price" data-type="platinum" ref="platinum_radio">
+                        <label class="form-check-label" for="platinum_price">
+                            Platinum (${{ platinum_price }})
+                        </label>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <label for="silver_price" class="form-label">Silver Price</label>
-                    <input v-model="eventData.silver_price" type="number" class="form-control" id="silver_price">
-                </div>
-                <div class="col-md-4">
-                    <label for="gold_price" class="form-label">Gold Price</label>
-                    <input v-model="eventData.gold_price" type="number" class="form-control" id="gold_price">
-                </div>
-                <div class="col-md-4">
-                    <label for="platinum_price" class="form-label">Platinum Price</label>
-                    <input v-model="eventData.platinum_price" type="number" class="form-control" id="platinum_price">
-                </div>
-
                 <div class="col-12 mt-4">
-                    <button class="btn form-btn btn-lg text-white text-uppercase">Update</button>
+                    <button class="btn form-btn btn-lg text-white text-uppercase">Create</button>
                 </div>
             </form>
         </div>
@@ -62,30 +71,81 @@
 import axios from 'axios';
 
 export default {
-    name: 'CreateEventView',
+    name: 'EditTicketView',
     data() {
         return {
+            // name: "",
+            // email: "",
+            // phone: "",
+            // type: "",
+            // price: "",
+            // event_id: "",
             errors: "",
-            eventData: {}
+            events: {},
+            silver_price: 0,
+            gold_price: 0,
+            platinum_price: 0,
+            ticketData: {},
+
+
+
         }
     },
-
     mounted() {
-        this.getEventData();
+        this.getEvents();
+        this.getTicketData();
     },
 
     methods: {
-        //Update Event
-        updateEvent: async function () {
+
+        //get events list to show in select
+        getEvents: function () {
+
+            axios.get('get-event-list', {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            }).then((res) => {
+                this.events = res.data;
+
+            }).catch((error) => {
+                console.log(error);
+            });
+
+        },
+
+        // Get Ticket Data
+        getTicketData: async function () {
+            const res = await axios.get('edit-ticket/' + this.$route.params.id, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            if (res.data.status) {
+                this.ticketData = res.data.ticket;
+                this.silver_price = this.ticketData.event.silver_price;
+                this.gold_price = this.ticketData.event.gold_price;
+                this.platinum_price = this.ticketData.event.platinum_price;
+                this.ticketData.type == 'silver' ? this.$refs.silver_radio.checked = true : this.$refs.silver_radio.checked = false;
+                this.ticketData.type == 'gold' ? this.$refs.gold_radio.checked = true : this.$refs.gold_radio.checked = false;
+                this.ticketData.type == 'platinum' ? this.$refs.platinum_radio.checked = true : this.$refs.platinum_radio.checked = false;
+            }
+            else {
+                this.$router.push('/pageNotFound');
+            }
+        },
+
+        //update ticket
+        updateTicket: async function () {
             this.errors = "";
             try {
-                const res = await axios.post('update-event/' + this.$route.params.id, this.eventData, {
+                const res = await axios.post('update-ticket/' + this.$route.params.id, this.ticketData, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
                 });
                 if (res.data.status) {
-                    this.$toast.success('Event updated Successfully');
+                    this.$toast.success('Ticket updated Successfully');
                 }
                 else {
                     this.$toast.error('Something went wrong please try again.');
@@ -93,22 +153,40 @@ export default {
             } catch (e) {
                 if (e.response.status === 422) {
                     this.errors = e.response.data.errors;
+                    console.log(this.errors);
                 }
             }
         },
 
-        // Get Event Data
-        getEventData: async function () {
-            const res = await axios.get('edit-event/' + this.$route.params.id, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-            if (res.data.status) {
-                this.eventData = res.data.event;
-            }
-            else {
-                this.$router.push('/pageNotFound');
+        //update the ticket price when user change the select option
+        updateTicketPrice: function (event) {
+            const index = event.target.options[event.target.options.selectedIndex].getAttribute('data-index');
+            this.silver_price = this.events[index].silver_price;
+            this.gold_price = this.events[index].gold_price;
+            this.platinum_price = this.events[index].platinum_price;
+            this.$refs.silver_radio.checked = false;
+            this.$refs.gold_radio.checked = false;
+            this.$refs.platinum_radio.checked = false;
+        },
+
+        // update the data of selected type and price
+        updateTypePrice: function (event) {
+            const type = event.target.getAttribute('data-type');
+            switch (type) {
+                case "silver":
+                    this.ticketData.type = type;
+                    this.ticketData.price = this.silver_price;
+                    break;
+                case "gold":
+                    this.ticketData.type = type;
+                    this.ticketData.price = this.gold_price;
+                    break;
+                case "platinum":
+                    this.ticketData.type = type;
+                    this.ticketData.price = this.platinum_price;
+                    break;
+                default:
+                    break;
             }
         }
     },
