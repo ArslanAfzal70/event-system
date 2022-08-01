@@ -43,11 +43,16 @@ $sidebarWdith : 300px;
     input,
     button {
         outline: none !important;
+
+    }
+
+    button {
         border: none !important;
     }
 
     button:focus,
-    .btn:focus {
+    .btn:focus,
+    .form-control:focus {
         box-shadow: none;
     }
 
@@ -55,6 +60,18 @@ $sidebarWdith : 300px;
 
 .bg-purple {
     background-color: $dark-purpule;
+}
+
+.form-btn {
+    background-color: $dark-purpule;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: #432D4E;
+    }
 }
 
 .sidebar-nav {

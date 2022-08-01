@@ -5,12 +5,12 @@
             <p class="text-muted m-b-30 font-13">Here you can manage events</p>
         </div>
         <div class="col-12 pb-3 d-flex justify-content-end no-outline">
-            <button class="btn btn-success btn-lg">
+            <router-link :to="{ name: 'event-create' }" class="btn btn-success btn-lg">
                 <font-awesome-icon icon="fa-solid fa-plus" />
                 <span class="ps-1 ">
                     Add new Event
                 </span>
-            </button>
+            </router-link>
         </div>
         <div class="table-responsive">
             <table id="myTable" class="table table-bordered mt-5 no-outline">

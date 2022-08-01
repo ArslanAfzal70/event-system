@@ -25,4 +25,5 @@ Route::post('login', [AdminController::class, 'login']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', [AdminController::class, 'logout']);
     Route::get('get-events', [EventController::class, 'getEvents']);
+    Route::post('create-event', [EventController::class, 'createEvent']);
 });
