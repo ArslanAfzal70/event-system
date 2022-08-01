@@ -38,7 +38,7 @@ class EventService
 
     public function getEventList()
     {
-        return Event::all();
+        return Event::withCount('tickets')->get();
     }
 
     /* ******************************************** */

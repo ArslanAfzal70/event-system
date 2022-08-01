@@ -25,6 +25,7 @@
                         <th>Gold Price</th>
                         <th>Platinum Price</th>
                         <th>Capacity</th>
+                        <th>No. of Bookings</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -39,6 +40,7 @@
                         <td>{{ e.gold_price }}</td>
                         <td>{{ e.platinum_price }}</td>
                         <td>{{ e.capacity }}</td>
+                        <td>{{ e.tickets_count }}</td>
                         <td>
                             <router-link class="btn btn-info btn-sm text-white action-btn"
                                 :to="{ name: 'event-edit', params: { id: e.id } }">
