@@ -47,11 +47,11 @@ class TicketService
     /* ******************************************** */
     public function getTicket($id)
     {
-        $event = Event::find($id);
-        if ($event) {
+        $ticket = Ticket::find($id);
+        if ($ticket) {
             return response()->json([
                 'status' => true,
-                'event' => $event
+                'ticket' => $ticket
             ]);
         } else {
             return response()->json([
@@ -96,18 +96,18 @@ class TicketService
 
     public function deleteTicket($id)
     {
-        $event = Event::find($id);
-        if (!$event) {
+        $ticket = Ticket::find($id);
+        if (!$ticket) {
             return response()->json([
                 'status' => false,
                 'msg' => "something went wrong please try again"
             ]);
         }
-        $event->delete();
+        $ticket->delete();
 
         return response()->json([
             'status' => true,
-            'msg' => "Event Deleted Successfully"
+            'msg' => "Ticket Deleted Successfully"
         ]);
     }
 }
