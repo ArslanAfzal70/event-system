@@ -29,13 +29,37 @@
                     <input v-model="phone" type="number" class="form-control" id="phone">
                 </div>
                 <div class="col-md-6">
-                    <label for="phone" class="form-label">Phone</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <label for="phone" class="form-label">Events</label>
+                    <select @change="updateTicketPrice($event)" v-model="event_id" class="form-select"
+                        aria-label="Default select example">
+                        <option selected disabled value=""> -- Select Event -- </option>
+                        <option v-for="(e, index) in events" :key="index" :value="e.id" :data-index="index">{{ e.title
+                        }}
+                        </option>
                     </select>
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                        <input @change="updateTypePrice($event)" class="form-check-input" name="eventPrice" type="radio"
+                            id="silver_price" :value="silver_price" data-type="silver" ref="silver_radio">
+                        <label class="form-check-label" for="silver_price">
+                            Silver (${{ silver_price }})
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input @change="updateTypePrice($event)" class="form-check-input" type="radio" name="eventPrice"
+                            id="gold_price" :value="gold_price" data-type="gold" ref="gold_radio">
+                        <label class="form-check-label" for="gold_price">
+                            Gold (${{ gold_price }})
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input @change="updateTypePrice($event)" class="form-check-input" type="radio" name="eventPrice"
+                            id="platinum_price" :value="platinum_price" data-type="platinum" ref="platinum_radio">
+                        <label class="form-check-label" for="platinum_price">
+                            Platinum (${{ platinum_price }})
+                        </label>
+                    </div>
                 </div>
                 <div class="col-12 mt-4">
                     <button class="btn form-btn btn-lg text-white text-uppercase">Create</button>
@@ -57,11 +81,33 @@ export default {
             type: "",
             price: "",
             event_id: "",
-            errors: ""
+            errors: "",
+            events: {},
+            silver_price: 0,
+            gold_price: 0,
+            platinum_price: 0,
+
         }
+    },
+    mounted() {
+        this.getEvents();
     },
 
     methods: {
+        getEvents: function () {
+
+            axios.get('get-event-list', {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            }).then((res) => {
+                this.events = res.data;
+
+            }).catch((error) => {
+                console.log(error);
+            });
+
+        },
         createTicket: async function () {
             this.errors = "";
             try {
@@ -69,9 +115,9 @@ export default {
                     name: this.name,
                     email: this.email,
                     phone: this.phone,
-                    type: this.silver_price,
-                    price: this.gold_price,
-                    event_id: this.date_end,
+                    type: this.type,
+                    price: this.price,
+                    event_id: this.event_id,
                 }, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -81,9 +127,11 @@ export default {
                     this.name = "";
                     this.email = "";
                     this.phone = "";
-                    this.silver_price = "";
-                    this.gold_price = "";
-                    this.date_end = "";
+                    this.type = "";
+                    this.price = "";
+                    this.$refs.silver_radio.checked = false;
+                    this.$refs.gold_radio.checked = false;
+                    this.$refs.platinum_radio.checked = false;
                     this.$toast.success('Ticket Created Successfully');
                 }
                 else {
@@ -94,6 +142,34 @@ export default {
                     this.errors = e.response.data.errors;
                     console.log(this.errors);
                 }
+            }
+        },
+        updateTicketPrice: function (event) {
+            const index = event.target.options[event.target.options.selectedIndex].getAttribute('data-index');
+            this.silver_price = this.events[index].silver_price;
+            this.gold_price = this.events[index].gold_price;
+            this.platinum_price = this.events[index].platinum_price;
+            this.$refs.silver_radio.checked = false;
+            this.$refs.gold_radio.checked = false;
+            this.$refs.platinum_radio.checked = false;
+        },
+        updateTypePrice: function (event) {
+            const type = event.target.getAttribute('data-type');
+            switch (type) {
+                case "silver":
+                    this.type = type;
+                    this.price = this.silver_price;
+                    break;
+                case "gold":
+                    this.type = type;
+                    this.price = this.gold_price;
+                    break;
+                case "platinum":
+                    this.type = type;
+                    this.price = this.platinum_price;
+                    break;
+                default:
+                    break;
             }
         }
     },
