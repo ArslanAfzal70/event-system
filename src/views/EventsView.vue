@@ -76,9 +76,8 @@ export default {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             }).then((res) => {
-                console.log(res);
-                // this.events = res.data;
-                // this.initDatatable();
+                this.events = res.data;
+                this.initDatatable();
 
             }).catch((error) => {
                 console.log(error);

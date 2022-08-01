@@ -4,6 +4,8 @@ import LoginView from "../views/LoginView.vue";
 import DashboardView from "../views/DashboardView.vue";
 import EventsView from "../views/EventsView.vue";
 import TicketsView from "../views/TicketsView.vue";
+import CreateTicketView from "../views/CreateTicketView.vue";
+import EditTicketView from "../views/EditTicketView.vue";
 import ReportView from "../views/ReportView.vue";
 import DefaultView from "../views/DefaultView.vue";
 import CreateEventView from "../views/CreateEventView.vue";
@@ -71,6 +73,18 @@ const routes = [
         name: "tickets",
         component: TicketsView,
         meta: { requiresAuth: true, title: "Ticktes" },
+      },
+      {
+        path: "ticket/create",
+        name: "ticket-create",
+        component: CreateTicketView,
+        meta: { requiresAuth: true, title: "Create Ticket" },
+      },
+      {
+        path: "ticket/edit/:id",
+        name: "ticket-edit",
+        component: EditTicketView,
+        meta: { requiresAuth: true, title: "Edit Ticket" },
       },
       {
         path: "report",

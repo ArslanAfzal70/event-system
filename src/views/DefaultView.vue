@@ -52,7 +52,8 @@ $sidebarWdith : 300px;
 
     button:focus,
     .btn:focus,
-    .form-control:focus {
+    .form-control:focus,
+    .form-select:focus {
         box-shadow: none;
     }
 
