@@ -23,7 +23,7 @@ class EventController extends Controller
     /* ******************************************** */
     public function getEvents()
     {
-        return Event::all();
+        return $this->eventService->getEventList();
     }
 
     /* ******************************************** */

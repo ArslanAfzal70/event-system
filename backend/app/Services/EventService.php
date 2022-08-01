@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class EventService
 {
+
+    /* ******************************************** */
+    /*                 CREATE EVENT                 */
+    /* ******************************************** */
     public function create(Request $request)
     {
         $event = new Event();
@@ -21,5 +25,14 @@ class EventService
         $event->platinum_price = $request->platinum_price;
         $event->capacity = $request->capacity;
         $event->save();
+    }
+
+    /* ******************************************** */
+    /*                GET EVENT LIST                */
+    /* ******************************************** */
+
+    public function getEventList()
+    {
+        return Event::all();
     }
 }
