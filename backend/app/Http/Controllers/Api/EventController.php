@@ -21,7 +21,7 @@ class EventController extends Controller
     /* ******************************************** */
     /*              GET ALL EVENTS LIST             */
     /* ******************************************** */
-    public function getEvents()
+    public function getEventList()
     {
         return $this->eventService->getEventList();
     }
@@ -38,5 +38,14 @@ class EventController extends Controller
             'status' => true,
             'msg' => "Event Added Successfully"
         ]);
+    }
+
+    /* ******************************************** */
+    /*                  EDIT EVENT                  */
+    /* ******************************************** */
+
+    public function editEvent($id)
+    {
+        return $this->eventService->getEvent($id);
     }
 }

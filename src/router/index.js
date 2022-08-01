@@ -7,6 +7,7 @@ import TicketsView from "../views/TicketsView.vue";
 import ReportView from "../views/ReportView.vue";
 import DefaultView from "../views/DefaultView.vue";
 import CreateEventView from "../views/CreateEventView.vue";
+import EditEventView from "../views/EditEventView.vue";
 import PageNotFoundView from "../views/PageNotFoundView.vue";
 
 Vue.use(VueRouter);
@@ -61,9 +62,10 @@ const routes = [
       {
         path: "event/edit/:id",
         name: "event-edit",
-        component: EventsView,
+        component: EditEventView,
         meta: { requiresAuth: true, title: "Edit Event" },
       },
+
       {
         path: "tickets",
         name: "tickets",

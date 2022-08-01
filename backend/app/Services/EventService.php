@@ -35,4 +35,22 @@ class EventService
     {
         return Event::all();
     }
+
+    /* ******************************************** */
+    /*                   GET EVENT                  */
+    /* ******************************************** */
+    public function getEvent($id)
+    {
+        $event = Event::find($id);
+        if ($event) {
+            return response()->json([
+                'status' => true,
+                'event' => $event
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+            ]);
+        }
+    }
 }

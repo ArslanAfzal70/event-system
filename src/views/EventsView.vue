@@ -71,7 +71,7 @@ export default {
     methods: {
         getEvents: function () {
 
-            axios.get('get-events', {
+            axios.get('get-event-list', {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
