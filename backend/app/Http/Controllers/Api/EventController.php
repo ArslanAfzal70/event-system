@@ -49,7 +49,7 @@ class EventController extends Controller
     /*                 UPDATE EVENT                 */
     /* ******************************************** */
 
-    public function updateEvent(Request $request, $id)
+    public function updateEvent(EventRequest $request, $id)
     {
         return $this->eventService->updateEvent($request, $id);
     }
