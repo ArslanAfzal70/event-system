@@ -13,6 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
+        $this->call([
+            AdminSeeder::class
+        ]);
+        $this->call([
+            EventSeeder::class
+        ]);
+        $this->call([
+            TicketSeeder::class
+        ]);
     }
 }
