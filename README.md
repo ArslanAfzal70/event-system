@@ -1,8 +1,8 @@
 # Event System
 
-**Pre Requirements**:
-Install [Xamp 7.4](https://www.apachefriends.org/download.html)
-Install [Composer](https://getcomposer.org/)
+**Pre Requirements**:  
+Install [Xamp 7.4](https://www.apachefriends.org/download.html)  
+Install [Composer](https://getcomposer.org/)  
 Install [Node.js](https://nodejs.org/en/)
 
 # Project Setup
@@ -38,7 +38,7 @@ php artisan key:generate
 php artisan serve
 ```
 
-Backend setup **DONE** !!
+Backend setup **DONE** !!  
 Now Minimize this cmd and go back to main project folder for fontend setup.
 
 ## Frontend Setup:
@@ -54,5 +54,5 @@ npm install
 npm run serve
 ```
 
-Frontend setup **DONE** !!
+Frontend setup **DONE** !!  
 open the url: http://localhost:8080 in your browser !
