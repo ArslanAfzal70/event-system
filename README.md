@@ -56,3 +56,7 @@ npm run serve
 
 Frontend setup **DONE** !!  
 open the url: http://localhost:8080 in your browser !
+
+**Login Details**:  
+Email: admin@email.com  
+Password:123
