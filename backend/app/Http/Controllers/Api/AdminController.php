@@ -38,6 +38,10 @@ class AdminController extends Controller
         }
     } // login function
 
+    /* ******************************************** */
+    /*                    LOGOUT                    */
+    /* ******************************************** */
+
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();

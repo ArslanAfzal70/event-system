@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\TicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,4 +44,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('edit-ticket/{id}', [TicketController::class, 'editTicket']);
     Route::post('update-ticket/{id}', [TicketController::class, 'updateTicket']);
     Route::post('delete-ticket/{id}', [TicketController::class, 'deleteTicket']);
+
+    /* ******************************************** */
+    /*                    REPORT                    */
+    /* ******************************************** */
+    Route::get('generate-report/{event_id}/{ticket_id}', [ReportController::class, 'generateReport']);
 });

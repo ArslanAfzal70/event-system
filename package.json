@@ -19,6 +19,8 @@
     "datatables.net-bs5": "^1.12.1",
     "datatables.net-buttons-bs5": "^2.2.3",
     "jquery": "^3.6.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.25",
     "jszip": "^3.10.0",
     "pdfmake": "^0.2.5",
     "vue": "^2.6.14",
