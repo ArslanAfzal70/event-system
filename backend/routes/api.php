@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\TicketController;
@@ -26,6 +27,11 @@ Route::post('login', [AdminController::class, 'login']);
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', [AdminController::class, 'logout']);
+
+    /* ******************************************** */
+    /*                   DASHBOARD                  */
+    /* ******************************************** */
+    Route::get('get-data-count', [DashboardController::class, 'getDataCount']);
 
     /* ******************************************** */
     /*                    EVENTS                    */
