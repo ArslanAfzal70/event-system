@@ -2,7 +2,7 @@
     <div class="bg-white pb-5 inner-wrapper">
         <div class="row">
             <div class="col-md-6">
-                <div class="card-box">
+                <div class="card-box" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="name">
                         <font-awesome-icon icon="fa-solid fa-calendar-days" class="text-muted" />
                         <span class="ps-1 text-muted">
@@ -17,7 +17,7 @@
             </div>
 
             <div class="col-md-6">
-                <div class="card-box">
+                <div class="card-box" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="1000">
 
                     <div class="name">
                         <font-awesome-icon icon="fa-solid fa-ticket" class="text-muted" /> <span
@@ -72,7 +72,7 @@ $yellow : #F4BF01;
 
 .card-box {
     border-top: 6px $yellow solid;
-    box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 7px;
     padding: 25px 20px;
     text-align: center;
