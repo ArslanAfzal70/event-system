@@ -17,11 +17,26 @@ Install [Node.js](https://nodejs.org/en/)
 2.  Copy and Paste .env.example file and rename it to .env
 3.  Add your database details in .env file
 4.  Open cmd and run the below commands
-    > composer install
-    > php artisan migrate --seed
-    > php artisan passport:install
-    > php artisan key:generate
-    > php artisan serve
+
+```
+composer install
+```
+
+```
+php artisan migrate --seed
+```
+
+```
+php artisan passport:install
+```
+
+```
+php artisan key:generate
+```
+
+```
+php artisan serve
+```
 
 Backend setup **DONE** !!
 Now Minimize this cmd and go back to main project folder for fontend setup.
@@ -31,8 +46,13 @@ Now Minimize this cmd and go back to main project folder for fontend setup.
 1.  Go to Main Project Folder: /
 2.  Open cmd and run the below commands
 
-> npm install
-> npm run serve
+```
+npm install
+```
+
+```
+npm run serve
+```
 
 Frontend setup **DONE** !!
 open the url: http://localhost:8080 in your browser !
